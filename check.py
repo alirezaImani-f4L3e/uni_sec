@@ -11,8 +11,8 @@ def check218754():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:requestFiltering /text:* | findstr -i "maxAllowedContentLength"'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        match = re.search(r'maxAllowedContentLength:"(\d+)"' , result.stdout.strip())
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        match = re.search(r'maxAllowedContentLength:"(\d+)"' , res.stdout.strip())
 
         if match:
             value = match.group(1)
@@ -32,8 +32,8 @@ def check218755():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:requestFiltering /text:* | findstr -i "MaxQueryString"'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        match = re.search(r'maxQueryString:"(\d+)"' , result.stdout.strip())
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        match = re.search(r'maxQueryString:"(\d+)"' , res.stdout.strip())
 
         if match:
             value = match.group(1)
@@ -53,8 +53,8 @@ def check218756():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:requestFiltering /text:* | findstr -i "allowHighBitCharacters"'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        match = re.search(r'allowHighBitCharacters:"(\w+)"' , result.stdout.strip())
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        match = re.search(r'allowHighBitCharacters:"(\w+)"' , res.stdout.strip())
 
         if match:
             value = match.group(1)
@@ -141,8 +141,8 @@ def check218751():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd list config "Default Web Site" /section:system.web/sessionState /text:mode'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value == "InProc":
             result = "done"
@@ -186,8 +186,8 @@ def check218753():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:requestFiltering /text:* | findstr -i "maxUrl"'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        match = re.search(r'maxUrl:"(\d+)"' , result.stdout.strip())
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        match = re.search(r'maxUrl:"(\d+)"' , res.stdout.strip())
 
         if match:
             value = match.group(1)
@@ -208,8 +208,8 @@ def check218736():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd list config "Default Web Site" /section:system.web/sessionState /text:cookieless'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value == "UseCookies":
             result = "done"
@@ -227,8 +227,8 @@ def check218737():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:access /commit:apphost /text:sslFlags'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value != "None":
             result = "done"
@@ -246,8 +246,8 @@ def check218735():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd list config "Default Web Site" /section:system.web/sessionState /text:mode'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value == "InProc":
             result = "done"
@@ -265,8 +265,8 @@ def check218749():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:access /commit:apphost /text:sslFlags'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value != "None" and int(value) >= 8:
             result = "done"
@@ -284,8 +284,8 @@ def check218738():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:access /commit:apphost /text:sslFlags'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
 
         if value and value != "None":
             result = "done"
@@ -303,8 +303,8 @@ def check218739():
     result = "failed"
     try:
         command = r'%windir%\system32\inetsrv\appcmd.exe list config /section:sites /text:siteDefaults.logFile.logTargetW3C'
-        result = subprocess.run(command , shell=True , text=True , capture_output=True)
-        value = result.stdout.strip()
+        res = subprocess.run(command , shell=True , text=True , capture_output=True)
+        value = res.stdout.strip()
         match1 = re.search('File' , value)
         match2 = re.search('ETW' , value)
         if match1 and match2:
